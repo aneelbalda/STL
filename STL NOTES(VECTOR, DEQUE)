@@ -1,0 +1,124 @@
+Iterators
+
+1. begin() – Returns an iterator pointing to the first element in the vector
+2. end() – Returns an iterator pointing to the theoretical element that follows last element in the vector
+3. rbegin() – Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element
+4. rend() – Returns a reverse iterator pointing to the theoretical element preceding the first element in the vector (considered as reverse end)
+
+Capacity
+
+1. size() – Returns the number of elements in the vector
+2. max_size() – Returns the maximum number of elements that the vector can hold
+3. capacity() – Returns the size of the storage space currently allocated to the vector expressed as number of elements
+4. resize(size_type g) – Resizes the container so that it contains ‘g’ elements
+5. empty() – Returns whether the container is empty
+
+Accessing the elements
+1. reference operator [g] – Returns a reference to the element at position ‘g’ in the vector
+2. at(g) – Returns a reference to the element at position ‘g’ in the vector
+3. front() – Returns a reference to the first element in the vector
+4. back() – Returns a reference to the last element in the vector
+
+int main()
+{
+vector <int> g1;
+
+for (int i = 1; i <= 10; i++)
+g1.push_back(i * 10);
+
+cout << "Reference operator [g] : g1[2] = " << g1[2];
+cout << endl;
+cout << "at : g1.at(4) = " << g1.at(4);
+cout << endl;
+cout << "front() : g1.front() = " << g1.front();
+cout << endl;
+cout << "back() : g1.back() = " << g1.back();
+cout << endl;
+
+return 0;
+
+}
+
+Modifiers
+
+1.1 assign(input_iterator first, input_iterator last) – Assigns new content to vector and resize
+1.2 assign(size_type n, const value_type g) – Assigns new content to vector and resize
+
+ex:-g1.assign(5, 10);   // 5 elements with value 10 each
+vector <int> :: iterator it;
+it = g1.begin() + 1;
+
+g2.assign(it, g1.end() - 1); // the 3 middle values of g1
+
+int gquiz[] = {1, 2};
+g3.assign(gquiz, gquiz + 2);   // assigning from array
+
+2. push_back(const value_type g) – Adds a new element ‘g’ at the end of the vector and increases the vector container size by 1
+
+3. pop_back() – Removes the element at the end of the vector, i.e., the last element and decreases the vector container size by 1
+
+
+4.1 insert(const_iterator q, const value_type g) – Adds element ‘g’ before the element referenced by iterator ‘q’ and returns an iterator that points to the newly added element
+
+4.2 insert(const_iterator q, size_type n, const value_type g) – Adds ‘n’ elements each with value ‘g’ before the element currently referenced by iterator ‘q’ and returns an iterator that points to the first of the newly added elements
+
+4.3 insert(const_iterator q, InputIterator first, InputIterator last) – Adds a range of elements starting from first to last, the elements being inserted after the position currently referred by ‘q’
+
+
+5.1 erase(const_iterator q) – Deletes the element referred by ‘q’ and returns an iterator to the element followed by the deleted element
+
+5.2 erase(const_iterator first, const_iterator last) – Deletes the elements in the range first to last, with the first iterator included in the range and the last iterator not included, and returns an iterator to the element followed by the last deleted element
+
+6. swap(vector q, vector r) – Swaps the contents of ‘q’ and ‘r’
+
+7. clear() – Removes all elements from the vector
+
+8. reserve(n) -  This function orders vector to allocate additional memory. Vector will not enlarge on push_back() operations until the size specified by reserve() will be reached.
+
+9. inserter() - This function is used to insert the elements at any position in the container. It accepts 2 arguments, the container and iterator to position where the elements have to be inserted.
+
+vector<int> ar = { 1, 2, 3, 4, 5 };
+vector<int> ar1 = {10, 20, 30}; 
+
+// Declaring iterator to a vector
+vector<int>::iterator ptr = ar.begin();
+
+// Using advance to set position
+advance(ptr, 3);
+
+
+// copying 1 vector elements in other using inserter()
+// inserts ar1 after 3rd position in ar
+copy(ar1.begin(), ar1.end(), inserter(ar,ptr));     // 1 2 3 10 20 30 4 5
+
+copy(from_begin, from_end, to_begin);
+copy(ar1.begin(), ar1.end(), back_inserter(ar));  // inserts at the back
+copy(ar1.begin(), ar1.end(), front_inserter(ar)); // works with dequeue only, inserts at front
+
+
+-> To insert elemements to vector with push_back use back_inserter.
+-> front_inserter is available for deque container only.
+-> And in some cases it is useful to remember that the first two arguments for ‘copy’ may be not only begin/end, but also rbegin/rend, which copy data in reverse order.
+
+==============================================================================================================
+
+DEQUEUE:-
+
+Double ended queues are sequence containers with the feature of expansion and contraction on both the ends. They are similar to vectors, but are more efficient in case of insertion and deletion of elements at the end, and also the beginning. Unlike vectors, contiguous storage allocation may not be guaranteed.
+
+The functions for deque are same as vector, with an addition of push and pop operations for both front and back.
+
+deque <int> gquiz;
+gquiz.push_back(10);
+gquiz.push_front(20);
+gquiz.push_back(30);
+gquiz.push_front(15);
+
+gquiz.size();
+gquiz.max_size();
+gquiz.at(2);
+gquiz.front();
+gquiz.back();
+
+gquiz.pop_front();
+gquiz.pop_back();

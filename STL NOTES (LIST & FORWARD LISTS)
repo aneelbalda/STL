@@ -1,0 +1,105 @@
+List
+
+Lists are sequence containers that allow non-contiguous memory allocation. As compared to vector, list has slow traversal, but once a position has been found, insertion and deletion are quick. Normally, when we say a List, we talk about doubly linked list. For implementing a singly linked list, we use forward list.
+
+ 
+
+Functions used with List :
+front() – Returns reference to the first element in the list
+back() – Returns reference to the last element in the list
+push_front(g) – Adds a new element ‘g’ at the beginning of the list
+push_back(g) – Adds a new element ‘g’ at the end of the list
+pop_front() – Removes the first element of the list, and reduces size of the list by 1
+pop_back() – Removes the last element of the list, and reduces size of the list by 1
+begin() – Returns an iterator pointing to the first element of the list
+end() – Returns an iterator pointing to the theoretical last element which follows the last element
+empty() – Returns whether the list is empty(1) or not(0)
+insert() – Inserts new elements in the list before the element at a specified position
+erase() – Removes a single element or a range of elements from the list
+assign() – Assigns new elements to list by replacing current elements and resizes the list
+remove() – Removes all the elements from the list, which are equal to given element
+reverse() – Reverses the list
+size() – Returns the number of elements in the list
+sort() – Sorts the list in increasing order
+advance(it,5)- control is passed from current position in list to 5 positions ahead.
+
+==============================================================================================================
+
+FORWARD LISTS:-
+
+Forward list in STL implements singly linked list. Introduced from C++11, forward list are useful than other containers in insertion, removal and moving operations (like sort) and allows time constant insertion and removal of elements.
+
+It differs from list by the fact that forward list keeps track of location of only next element while list keeps track to both next and previous elements, thus increasing the storage space required to store each element. The drawback of forward list is that it cannot be iterated backwards and its individual elements cannot be accessed directly.
+
+Forward List is preferred over list when only forward traversal is required (same as singly linked list is preferred over doubly linked list) as we can save space. Some example cases are, chaining in hashing, adjacency list representation of graph, etc.
+
+Operations on Forward List :
+
+1. assign() :- This function is used to assign values to forward list, its another variant is used to assign repeated elements. 
+
+	// Declaring forward list
+    forward_list<int> flist1;
+ 
+    // Declaring another forward list
+    forward_list<int> flist2;
+ 
+    // Assigning values using assign()
+    flist1.assign({1, 2, 3});
+ 
+    // Assigning repeating values using assign()
+    // 5 elements with value 10
+    flist2.assign(5, 10);
+
+2. push_front() :- This function is used to insert the element at the first position on forward list. The value from this function is copied to the space before first element in the container. The size of forward list increases by 1.
+
+3. emplace_front() :- This function is similar to the previous function but in this no copying operation occurs, the element is created directly at the memory before the first element of the forward list.
+
+4. pop_front() :- This function is used to delete the first element of list. 
+
+	// Initializing forward list
+    forward_list<int> flist = {10, 20, 30, 40, 50};
+
+    flist.push_front(60);
+    flist.emplace_front(70);
+    flist.pop_front();
+
+4. insert_after() This function gives us a choice to insert elements at any position in forward list. The arguments in this function are copied at the desired position.
+
+5. emplace_after() This function also does the same operation as above function but the elements are directly made without any copy operation.
+
+6. erase_after() This function is used to erase elements from a particular position in the forward list.
+	
+	forward_list<int> flist = {10, 20, 30} ;	
+
+	//Declaring a forward list iterator
+    forward_list<int>::iterator ptr;
+
+    // Inserting value using insert_after()
+    // starts insertion from second position
+    ptr =  flist.insert_after(flist.begin(), {1, 2, 3}); //  10 1 2 3 20 30 
+
+    ptr = flist.emplace_after(ptr,2);		// 10 1 2 3 2 20 30
+
+    // Deleting value using erase.after Deleted 2
+    // after ptr
+    ptr = flist.erase_after(ptr);			// 10 1 2 3 2 30
+
+7. remove() :- This function removes the particular element from the forward list mentioned in its argument.
+
+8. remove_if() :- This function removes according to the condition in its argument.
+
+	flist.remove(40);
+
+	flist.remove_if([](int x){ return x>20;});
+
+9. splice_after() :- This function transfers elements from one forward list to other. 
+
+	// Initializing forward list
+    forward_list<int> flist1 = {10, 20, 30};
+     
+    // Initializing second list
+    forward_list<int> flist2 = {40, 50, 60};
+     
+    // Shifting elements from first to second
+    // forward list after 1st position
+    flist2.splice_after(flist2.begin(),flist1);  // 40 10 20 30 50 60 

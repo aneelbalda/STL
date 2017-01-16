@@ -1,0 +1,133 @@
+QUEUES:-
+
+Queues are a type of container adaptors which operate in a first in first out (FIFO) type of arrangement. Elements are inserted at the back (end) and are deleted from the front.
+
+The functions supported by queue are :
+empty() – Returns whether the queue is empty
+size() – Returns the size of the queue
+front() – Returns a reference to the first element of the queue
+back() – Returns a reference to the last element of the queue
+push(g) – Adds the element ‘g’ at the end of the queue
+pop() – Deletes the first element of the queue
+
+queue <int> gquiz;
+
+gquiz.push(10);
+gquiz.size();
+gquiz.front();
+gquiz.back();
+gquiz.pop();
+
+==============================================================================================================
+
+PRIORITY QUEUE:-
+
+Priority queues are a type of container adaptors, specifically designed such that the first element of the queue is the greatest of all elements in the queue.
+
+priority_queue <int> pq;
+
+The functions associated with priority queue are:
+
+empty() – Returns whether the queue is empty
+size() – Returns the size of the queue
+top() – Returns a reference to the top most element of the queue
+push(g) – Adds the element ‘g’ at the end of the queue
+pop() – Deletes the first element of the queue
+
+=============================================================================
+
+priority_queue supports a constructor that requires two extra arguments to make it min heap.
+
+priority_queue <Type, vector<Type>, ComparisonType > min_heap;
+priority_queue <int, vector<int>, greater<int> > pq; // MIN min_heap
+
+=============================================================================
+
+ Min heap of user defined class:
+
+// C++ program to us priority_queue to implement Min Heap
+// for user defined class
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// User defined class, Point
+class Point
+{
+   int x;
+   int y;
+public:
+   Point(int _x, int _y)
+   {
+      x = _x;
+      y = _y;
+   }
+   int getX() const { return x; }
+   int getY() const { return y; }
+};
+ 
+// To compare two points
+class myComparator
+{
+public:
+    int operator() (const Point& p1, const Point& p2)
+    {
+        return p1.getX() > p2.getX();
+    }
+};
+ 
+// Driver code
+int main ()
+{
+    // Creates a Min heap of points (order by x coordinate)
+    priority_queue <Point, vector<Point>, myComparator > pq;
+ 
+    // Insert points into the min heap
+    pq.push(Point(10, 2));
+    pq.push(Point(2, 1));
+    pq.push(Point(1, 5));
+ 
+    // One by one extract items from min heap
+    while (pq.empty() == false)
+    {
+        Point p = pq.top();
+        cout << "(" << p.getX() << ", " << p.getY() << ")";
+        cout << endl;
+        pq.pop();
+    }
+ 
+    return 0;
+}
+
+
+
+
+==============================================================================================================
+
+STACK:-
+
+Stacks are a type of container adaptors with LIFO(Last In First Out) type of working, where a new element is added at one end and (top) an element is removed from that end only.
+ 
+The functions associated with stack are:
+empty() – Returns whether the stack is empty
+size() – Returns the size of the stack
+top() – Returns a reference to the top most element of the stack
+push(g) – Adds the element ‘g’ at the top of the stack
+pop() – Deletes the top most element of the stack
+
+stack <int> gquiz;
+gquiz.push(10);
+gquiz.size();
+gquiz.top();
+gquiz.pop();
+
+// creating a deep copy of stack, changes in 'g' won't be reflected in 'gq' 
+stack <int> gq
+stack <int> g = gq;
+
+//same can be done with queue and prority_queue
+
+queue <int> gq
+queue <int> g = gq;
+
+priority_queue <int> gq
+priority_queue <int> g = gq;
